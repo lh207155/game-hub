@@ -1,4 +1,4 @@
-import { ColorModeContext, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import GamaGrid from "./components/GamaGrid";
 import GenreList from "./components/GenreList";

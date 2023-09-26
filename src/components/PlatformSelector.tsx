@@ -6,15 +6,15 @@ import { Platform } from "../hooks/usePlatforms";
 
 interface Props {
   onSelectChange: (platform: Platform) => void;
-  platform: Platform | null;
+  selectedPlatform: Platform | null;
 }
-const PlatformSelector = ({ onSelectChange, platform }: Props) => {
+const PlatformSelector = ({ onSelectChange, selectedPlatform }: Props) => {
   const { data, isLoading, error } = usePlatforms();
   if (error) return;
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-        {platform?.name || "platform"}
+        {selectedPlatform?.name || "platform"}
       </MenuButton>
       <MenuList>
         {data.map((platform) => (

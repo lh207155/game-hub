@@ -5,21 +5,38 @@ import usePlatforms from "../hooks/usePlatforms";
 import { Platform } from "../hooks/usePlatforms";
 
 interface Props {
-  // onSelectChange: (platform: Platform) => void;
-  // selectedPlatform: Platform | null;
+  onSelectSortOrder: (sortOrder: string) => void;
+  selectedSortOrder: string;
 }
-const SortSelector = () => {
-  const { data, isLoading, error } = usePlatforms();
-  if (error) return;
+const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
+  const sortOrders = [
+    { value: "", label: "Relevance" },
+    { value: "-added", label: "Date added" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release date" },
+    { value: "-metacritic", label: "Popularity" },
+    { value: "-rating", label: "Average rating" },
+  ];
+  const sortOrder = sortOrders.find(
+    (sortOrder) => sortOrder.value === selectedSortOrder
+  );
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-        321
+        Order by: {sortOrder?.label || "Relevance"}
       </MenuButton>
       <MenuList>
-        <MenuItem>1</MenuItem>
-        <MenuItem>2</MenuItem>
-        <MenuItem>3</MenuItem>
+        {sortOrders.map((order) => (
+          <MenuItem
+            key={order.value}
+            value={order.value}
+            onClick={() => {
+              onSelectSortOrder(order.value);
+            }}
+          >
+            {order.label}
+          </MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );
